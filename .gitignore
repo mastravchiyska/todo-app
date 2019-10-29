@@ -1,6 +1,5 @@
 node_modules
 client/node_modules
-client/README.md
 client/sails.io.js
 server/config/local.js
 server/node_modules
