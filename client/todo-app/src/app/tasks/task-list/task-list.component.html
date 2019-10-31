@@ -1,22 +1,39 @@
-<mat-card class="task-card" *ngFor="let task of tasks">
-  <mat-card-header>
-    <div mat-card-avatar class="task-status-image">
-      <mat-icon *ngIf="task.completed" class="material-icons" color="primary">
-        done_outline
-      </mat-icon>
-      <mat-icon *ngIf="!task.completed" class="material-icons" color="accent">
-        history
-      </mat-icon>
-    </div>
-    <mat-card-title>{{task.title}}</mat-card-title>
-  </mat-card-header>
-  <mat-card-content>{{task.description}}</mat-card-content>
-  <mat-card-actions align="end">
-    <button mat-raised-button color="primary">
-      <mat-icon mat-button>edit</mat-icon>
-    </button>
-    <button mat-raised-button color="warn">
-      <mat-icon mat-button>delete</mat-icon>
-    </button>
-  </mat-card-actions>
-</mat-card>
+<div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="30px">
+  <h2>All Tasks</h2>
+  <button mat-raised-button color="primary" (click)="createTask()">
+    <mat-icon mat-button>add_to_photos</mat-icon> Create Task
+  </button>
+</div>
+<div fxLayout="row wrap" fxLayoutAlign="start start" fxLayoutGap="50px">
+  <div fxLayout="column" class="task-card-container" fxLayoutGap="10px">
+    <mat-card class="task-card" *ngFor="let task of tasks" fxLayout="row wrap" fxLayoutAlign="right center">
+      <mat-card-header class="task-header">
+        <div mat-card-avatar class="task-status-image">
+          <mat-icon *ngIf="task.completed" class="material-icons" color="primary">
+            done_outline
+          </mat-icon>
+          <mat-icon *ngIf="!task.completed" class="material-icons" color="accent">
+            history
+          </mat-icon>
+        </div>
+        <mat-card-title>{{task.title}}</mat-card-title>
+        <mat-card-subtitle>{{task.description}}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-actions>
+        <button mat-raised-button matTooltip="Edit Task" class="icon-button" (click)="selectTask(task)" color="primary">
+          <mat-icon mat-button>edit</mat-icon>
+        </button>
+        <button mat-raised-button matTooltip="Delete Task" class="icon-button" (click)="deleteTask(task)" color="warn">
+          <mat-icon mat-button>delete</mat-icon>
+        </button>
+        <button mat-raised-button matTooltip="Complete Task" class="icon-button" *ngIf="!task.completed" (click)="completeTask(task)"
+          color="accent">
+          <mat-icon mat-button>done_outline</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <app-task-details *ngIf="isSelected" [task]="selectedTask" (modified)="updateTask($event)" (canceled)="onCanceled()">
+  </app-task-details>
+</div>
