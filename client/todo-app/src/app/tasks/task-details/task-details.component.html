@@ -1,0 +1,31 @@
+<mat-card class="task-card-detail">
+  <mat-card-header>
+    <mat-card-title>{{task.title}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form #f="ngForm">
+      <mat-form-field>
+        <input readonly matInput type="text" id="id" name="id" [ngModel]="task?.id" placeholder="task Id">
+      </mat-form-field>
+      <mat-form-field>
+        <input readonly matInput type="text" id="createdAt" name="createdAt" [ngModel]="task?.createdAt | date" placeholder="Created At">
+      </mat-form-field>
+      <mat-form-field>
+        <input readonly matInput type="text" id="updatedAt" name="updatedAt" [ngModel]="task?.updatedAt | date" placeholder="Last update at">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" id="name" name="name" [(ngModel)]="task.title" placeholder="Task title" required
+          minlength="2" maxlength="24">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" id="description" name="description" [(ngModel)]="task.description"
+          placeholder="Task description">
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions fxFlexAlign="end">
+        <button mat-raised-button color="primary" (click)="update()"
+          [disabled]="f.pristine || f.invalid">Save</button>
+        <button mat-raised-button (click)="cancel()">Cancel</button>
+      </mat-card-actions>
+</mat-card>
