@@ -1,17 +1,27 @@
-<mat-card class="task-card-detail">
+<mat-card class="task-card-detail" *ngIf="task" fxLayout="row wrap" fxLayoutAlign="left center">
   <mat-card-header>
-    <mat-card-title>{{task.title}}</mat-card-title>
+    <div mat-card-avatar *ngIf="mode == 'edit'" class="task-status-image">
+      <mat-icon *ngIf="task.completed" class="material-icons" color="primary">
+        done_outline
+      </mat-icon>
+      <mat-icon *ngIf="!task.completed" class="material-icons" color="accent">
+        history
+      </mat-icon>
+    </div>
+    <mat-card-title *ngIf="mode == 'edit'">{{task.title}}</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <form #f="ngForm">
-      <mat-form-field>
+      <mat-form-field *ngIf="mode == 'edit'">
         <input readonly matInput type="text" id="id" name="id" [ngModel]="task?.id" placeholder="task Id">
       </mat-form-field>
-      <mat-form-field>
-        <input readonly matInput type="text" id="createdAt" name="createdAt" [ngModel]="task?.createdAt | date" placeholder="Created At">
+      <mat-form-field *ngIf="mode == 'edit'">
+        <input readonly matInput type="text" id="createdAt" name="createdAt" [ngModel]="task?.createdAt | date"
+          placeholder="Created At">
       </mat-form-field>
-      <mat-form-field>
-        <input readonly matInput type="text" id="updatedAt" name="updatedAt" [ngModel]="task?.updatedAt | date" placeholder="Last update at">
+      <mat-form-field *ngIf="mode == 'edit'">
+        <input readonly matInput type="text" id="updatedAt" name="updatedAt" [ngModel]="task?.updatedAt | date"
+          placeholder="Last update at">
       </mat-form-field>
       <mat-form-field>
         <input matInput type="text" id="name" name="name" [(ngModel)]="task.title" placeholder="Task title" required
@@ -24,8 +34,7 @@
     </form>
   </mat-card-content>
   <mat-card-actions fxFlexAlign="end">
-        <button mat-raised-button color="primary" (click)="update()"
-          [disabled]="f.pristine || f.invalid">Save</button>
-        <button mat-raised-button (click)="cancel()">Cancel</button>
-      </mat-card-actions>
+    <button mat-raised-button color="primary" (click)="onUpdate()" [disabled]="f.pristine || f.invalid">Save</button>
+    <button mat-raised-button (click)="onCancel()">Cancel</button>
+  </mat-card-actions>
 </mat-card>
