@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { TasksService } from './services/tasks.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +7,4 @@ import { TasksService } from './services/tasks.service';
 })
 export class AppComponent {
   title = 'ToDo Task Manager';
-  // this.openedTasks = this.tasks.filter(task => task.completed !== true);
-  // this.completedTasks = this.tasks.filter(task => task.completed === true);
-
 }
