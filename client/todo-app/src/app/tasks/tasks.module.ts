@@ -6,19 +6,29 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { TaskListComponent } from './task-list/task-list.component';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { TaskDetailsComponent } from './task-details/task-details.component';
+import { FormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 
 @NgModule({
-  declarations: [TaskListComponent],
-  exports: [TaskListComponent],
+  declarations: [TaskListComponent, TaskDetailsComponent],
+  exports: [TaskListComponent, TaskDetailsComponent],
   imports: [
     CommonModule,
     MatCardModule,
     MatButtonModule,
     MatIconModule,
     MatInputModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatTooltipModule,
+    FormsModule,
+    FlexLayoutModule
   ]
 })
 export class TasksModule { }
