@@ -1,6 +1,6 @@
 <div fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="30px">
   <h2>All Tasks</h2>
-  <button mat-raised-button color="primary" (click)="createTask()">
+  <button mat-raised-button color="primary" (click)="selectTask( undefined, 'new')">
     <mat-icon mat-button>add_to_photos</mat-icon> Create Task
   </button>
 </div>
@@ -21,19 +21,22 @@
       </mat-card-header>
 
       <mat-card-actions>
-        <button mat-raised-button matTooltip="Edit Task" class="icon-button" (click)="selectTask(task)" color="primary">
+        <button mat-raised-button matTooltip="Edit Task" class="icon-button" (click)="selectTask(task, 'edit')" color="primary">
           <mat-icon mat-button>edit</mat-icon>
         </button>
         <button mat-raised-button matTooltip="Delete Task" class="icon-button" (click)="deleteTask(task)" color="warn">
           <mat-icon mat-button>delete</mat-icon>
         </button>
-        <button mat-raised-button matTooltip="Complete Task" class="icon-button" *ngIf="!task.completed" (click)="completeTask(task)"
-          color="accent">
+        <button mat-raised-button matTooltip="Complete Task" class="icon-button" *ngIf="!task.completed"
+          (click)="completeTask(task)" color="accent">
           <mat-icon mat-button>done_outline</mat-icon>
         </button>
       </mat-card-actions>
     </mat-card>
   </div>
-  <app-task-details *ngIf="isSelected" [task]="selectedTask" (modified)="updateTask($event)" (canceled)="onCanceled()">
-  </app-task-details>
+  <div fxLayout="column" class="task-card-container" fxLayoutGap="10px">
+    <app-task-details *ngIf="mode" [mode]="mode" [id]="selectedTaskId" (modified)="onSave()"
+      (canceled)="onCanceled()">
+    </app-task-details>
+  </div>
 </div>
