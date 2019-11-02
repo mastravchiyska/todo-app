@@ -10,35 +10,26 @@ export class TasksService {
 
   constructor(private http: HttpClient) { }
 
-  listAll() {
+  listAll(){
     return this.http.get(this.url).pipe(
       map(resp => resp),
-      tap(entities => console.log(typeof entities)),
       retry(3)
     )
   }
 
   getTaskById(id) {
-    return this.http.get(this.url + id).pipe(
-      tap(task => console.log(`Task fetched! ${JSON.stringify(task)}`))
-    )
+    return this.http.get(this.url + id);
   }
 
   addTask(task) {
-    return this.http.post(this.url, task).pipe(
-      tap(t => console.log(`Task successfully created! ${JSON.stringify(t)}`))
-    )
+    return this.http.post(this.url, task);
   }
 
-  update(task){
-    return this.http.put(this.url+ task.id, task).pipe(
-      tap(t => console.log(`Task successfully updated! ${JSON.stringify(t)}`))
-    )
+  update(task) {
+    return this.http.put(this.url + task.id, task);
   }
 
   delete(id: number) {
-    return this.http.delete(this.url + id).pipe(
-      tap(task => console.log(`Task successfully deleted! ${JSON.stringify(task)}`))
-    )
+    return this.http.delete(this.url + id);
   }
 }
